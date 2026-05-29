@@ -1,0 +1,5 @@
+1. "fundo rosa claro, fonte preta, fonte maior"
+2. "nome: Isabelly Ribas"
+3. "remover qualquer descrição indesejada"
+4. "manter apenas a informação de que é estudante de Desenvolvimento de Sistemas"
+5. "projetos, contato e botões de estágio/currículo"
