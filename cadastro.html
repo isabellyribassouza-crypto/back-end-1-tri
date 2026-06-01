@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back End</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #e8f4f8;
+        }
+        
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #0052a3;
+        }
+        
+        #resposta {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
+    <script>
+        function pesquisarCEP() {
+            const cep = document.getElementById("cep").value
+            const validacep = /^[0-9]{8}$/
+            if (validacep.test(cep)) {
+                const link = "https://viacep.com.br/ws/" + cep + "/json/?callback=preencherEndereco"
+                var script = document.createElement("script")
+                script.src = link
+                document.body.appendChild(script)
+            } else {
+                resposta.textContent = "O CEP foi digitado fora do padrão aceito"
+            }
+        }
+        function preencherEndereco(conteudo) {
+            if ("erro" in conteudo) {
+                resposta.textContent = "O CEP digitado está incorreto"
+                document.getElementById("cep").value = ""
+            } else {
+                resposta.textContent = JSON.stringify(conteudo)
+            }
+        }
+    </script>
+</head>
+<body>
+    <label>CEP:</label>
+    <input type="text" id="cep">
+    <button onclick="pesquisarCEP()">Enviar</button>
+    <div id="resposta"></div>
+</body>
+</html>
